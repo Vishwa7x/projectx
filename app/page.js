@@ -2,10 +2,13 @@ import ButtonLogin from "./components/buttonLogin";
 import FAQlistItem from "./components/FAQlistItems";
 import Image from "next/image";
 import productDemo from "@/app/productDemo.jpeg";
-export default function Home() {
+import { auth } from "@/auth";
 
-  const isLoggedIn=true;
-  const name="Vishwa";
+export default async function Home() {
+
+  const session = await auth()
+  console.log(session);
+  
   const pricingFeaturesList=["Collect customer feedback","Unlimited boards","Admin dashboard","24/7 support"];
   return (
     <main>
@@ -18,7 +21,7 @@ export default function Home() {
           <a className="link link-hover" href="#faq">FAQ</a>
         </div>
         <div>
-         <ButtonLogin isLoggedIn={isLoggedIn} name={name} />
+         <ButtonLogin session={session}  />
         </div>
         </div>
       </section>
@@ -30,7 +33,7 @@ export default function Home() {
       <div className="opacity-90 mb-10">
            Create a feedback board in minutes,prioritize features and build products your customers will love.
       </div>
-      <ButtonLogin  isLoggedIn={isLoggedIn} name={name}/>
+      <ButtonLogin  session={session}/>
       </div>
       </section>
 
@@ -52,7 +55,7 @@ export default function Home() {
 </svg>
 {priceItems}</li> ))}
         </ul>
-        <ButtonLogin isLoggedIn={isLoggedIn} name={name} extraStyle="w-full"  />
+        <ButtonLogin session={session} extraStyle="w-full"  />
         </div>
         </div>
       </section>
@@ -83,4 +86,4 @@ export default function Home() {
        </section>
     </main>
   );
-} 
+}
